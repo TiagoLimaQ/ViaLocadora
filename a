@@ -4,16 +4,12 @@ CREATE TABLE Marcas (
 id Int auto_increment PRIMARY KEY,
 nome VARCHAR(50) NOT NULL UNIQUE
 );
-
-
 CREATE TABLE Modelos (
 id INT auto_increment PRIMARY KEY,
 nome VARCHAR(50) NOT NULL,
 id_marca INT,
 FOREIGN KEY (id_marca) REFERENCES Marcas(id)
 );
-
-
 CREATE TABLE veiculos (
 id INT auto_increment primary key,
 placa VARCHAR(10) NOT NULL UNIQUE,
@@ -23,8 +19,6 @@ id_modelo int,
 status enum('Disponivel', 'locado', 'Em manutenção') default 'disponivel',
 foreign key (id_modelo) references Modelos(id)
 );
-
-
 create table Clientes (
 id int auto_increment primary key,
 nome varchar(100) not null,
@@ -32,8 +26,6 @@ cpf varchar(14) not null unique,
 telefone varchar(15),
 endereço varchar(255)
 );
-
-
 create table Contratos (
 id int auto_increment primary key,
 id_cliente int,
@@ -44,8 +36,6 @@ valor_total decimal(10, 2),
 foreign key (id_cliente) references Clientes(id),
 foreign key (id_veiculo) references veiculos(id)
 );
-
-
  create table Pagamentos (
 id int auto_increment primary key,
 id_contrato int,
@@ -53,9 +43,7 @@ data_pagamento date not null,
 valor decimal(10, 2) not null,
 metodo enum('dinheiro', ' Cartão de Credito', 'Transferencia') not null,
 foreign key (id_contrato) references contratos(id)
-);
-
-
+);   
 
 insert into Marcas (nome) values
 ('Chevrolet'),
@@ -117,7 +105,6 @@ insert into veiculos (placa, ano, cor, id_modelo) values
 ('ABC7890', 2020, 'Branco', 29),
 ('DEF0123', 2022, 'Preto' ,30);
 
-
  use autovialocadora;
  INSERT INTO Clientes (nome, cpf, telefone, endereço) VALUES
  ('Ana Paula', '111.272.323-44', '(11) 91234-5678', 'Rua D, 123'),
@@ -151,7 +138,6 @@ insert into veiculos (placa, ano, cor, id_modelo) values
 ('Carla Mendes', '969.000.111-22', '(21 90012-3456)', 'Rua FF, 2626'),
 ('Diego Santos', '009.111.222-33', '(31) 91123-4567', 'Rua GG, 2727');
 
-
 set foreign_key_checks=0;
 insert into Contratos (id_cliente, id_veiculo, data_inicio, data_fim, valor_total) values
 (1, 1, '2024-07-01', '2024-07-10', 500.00);
@@ -177,3 +163,4 @@ INSERT INTO Contratos (id_cliente, id_veiculo, data_inicio, data_fim, valor_tota
 INSERT INTO Pagamentos (id_contrato, data_pagamento, valor, metodo) VALUES
 (1, '2024-08-01', 350.00, 'Cartão de Crédito'),
 (3, '2024-08-10', 400.00, 'Dinheiro');
+select * from autovialocadora;
